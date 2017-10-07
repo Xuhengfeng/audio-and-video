@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		ul,li{
+			list-style:none;
+		}
+		ul li{
+			float:left;
+		}
+		ul li button{
+			width:50px;
+			height:200px;
+		}
+		input{
+			width:30px;
+		}
+	</style>
+</head>
+<body>
+<!-- 钢琴 -->
+	<h3>简易钢琴案例</h3>
+	<div>
+		<button>-</button>
+		<input type="text" value="4" id="yinjie">
+		<button>+</button>
+	</div>
+	<ul>
+		
+		<li><button>1</button></li>
+		<li><button>2</button></li>
+		<li><button>3</button></li>
+		<li><button>4</button></li>
+		<li><button>5</button></li>
+		<li><button>6</button></li>
+		<li><button>7</button></li>
+		
+	</ul>		
+	<script>
+		var ySize=document.querySelector('#yinjie');
+		var aBtn=document.querySelectorAll('button');
+		aBtn[0].onclick=function(){
+			ySize.value=(ySize.value--)==0?0:ySize.value;
+		};
+		aBtn[1].onclick=function(){
+			ySize.value=(ySize.value++)==7?7:ySize.value;
+			console.log(ySize.value);
+		};
+
+		var oUl=document.querySelector('ul');
+		var aBtns=document.querySelectorAll('li');
+		console.log(aBtns);
+		//点击事件
+		var num=[65,83,68,70,71,72,74];
+		for(var i=0;i<aBtns.length;i++){
+			aBtns[i].index=num[i];
+			aBtns[i].onclick=function(){
+				call(this.index);
+			}
+		}
+
+
+		// 键盘事件
+		window.onkeydown=function(e){
+			call(e)
+		}
+		function call(e){
+			// console.log(typeof e)
+			switch(e.keyCode||e){
+				case 65:
+				var audio=new Audio();
+				audio.src='../raw1/c'+ySize.value+'.ogg';
+				audio.play();
+				break;
+				case 83:
+				var audio=new Audio();
+				audio.src='../raw1/d'+ySize.value+'.ogg';
+				audio.play();
+				break;
+				case 68:
+				var audio=new Audio();
+				audio.src='../raw1/e'+ySize.value+'.ogg';
+				audio.play();
+				break;
+				case 70:
+				var audio=new Audio();
+				audio.src='../raw1/f'+ySize.value+'.ogg';
+				audio.play();
+				break;
+				case 71:
+				var audio=new Audio();
+				audio.src='../raw1/g'+ySize.value+'.ogg';
+				audio.play();
+				break;
+				case 72:
+				var audio=new Audio();
+				audio.src='../raw1/a'+ySize.value+'.ogg';
+				audio.play();
+				break;
+				case 74:
+				var audio=new Audio();
+				audio.src='../raw1/b'+ySize.value+'.ogg';
+				audio.play();
+				break;
+			}
+		}
+	</script>
+</body>
+</html>

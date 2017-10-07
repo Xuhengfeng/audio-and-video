@@ -1,0 +1,89 @@
+<!doctype html>
+<title>document</title>
+<meta charset="utf-8">
+<video src="video1/oceans.mp4" id="vie" controls poster="video1/yamiedie.jpeg" loop></video>
+<button>播放</button>
+<button>快进</button>
+<button>快退</button>
+<button>播放速度+</button>
+<button>播放速度-</button>
+<button>全屏</button>
+<button>重新加载</button>
+<button>关闭音量</button>
+<input type="range" max="100" min="0" value="30" onchange="controls(8,this)">
+<span>x</span><span id="cs">0</span>
+<script>
+	var oM=document.querySelector('#vie');
+	var aBtn=document.querySelectorAll('button');
+	var oSpan=document.querySelector('#cs');
+
+
+	for(var i=0;i<aBtn.length;i++){
+		aBtn[i].index=i;
+		aBtn[i].onclick=function(){
+			controls(this.index);
+		}
+	}
+	function controls(state){
+		var init=state;
+		state=state==2?1:state;
+		state=state==4?3:state;
+
+		switch(state){
+			case 0:
+			if(aBtn[state].innerHTML=='播放'){
+				aBtn[state].innerHTML='暂停';
+				oM.play();
+			}else{
+				aBtn[state].innerHTML='播放';
+				oM.pause();
+			}
+			break;
+
+			case 1:
+			if(init==1){
+				oM.currentTime+=5;
+			}else{
+				oM.currentTime-=5;
+			}
+			break;
+
+			case 3:
+			if(init==3){
+				oM.playbackRate+=.2;
+				oM.playbackRate=oM.playbackRate>1.9?1:oM.innerHTML;
+				oSpan.innerHTML=(oSpan.innerHTML++)==4?1:oSpan.innerHTML;
+			}else{
+				oM.playbackRate-=.2;
+				oM.playbackRate=oM.playbackRate<.2?1:oM.playbackRate;
+				oSpan.innerHTML=(oSpan.innerHTML--)==-4?0:oSpan.innerHTML;
+			}
+
+			break;
+
+			case 5:
+				oM.webkitRequestFullscreen();
+			break;
+
+			case 6:
+				oM.load();
+				oM.play();
+			break;
+
+			case 7:
+			if(oM.muted){
+				oM.muted=false;
+				aBtn[state].innerHTML='关闭音量';
+			}else{
+				oM.muted=true;
+				aBtn[state].innerHMTL='打开音量';
+			}
+			break;
+
+
+			case 8:
+			oM.volume=node.value/100;
+		}
+
+	}
+</script>

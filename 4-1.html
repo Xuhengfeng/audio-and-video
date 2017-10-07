@@ -1,0 +1,43 @@
+<!doctype html>
+<title></title>
+<meta charset="utf-8"> 
+<style>
+	.box{
+		width:512px;
+		height:20px;
+		border:1px solid #adadad;
+		background:#adadad;
+	}
+	.bar{
+		height:20px;
+		width:100px;
+		background:green;
+	}
+</style>
+<video src="video1/1.mp4" id="vie" controls poster="video1/yamiedie.jpeg" loop></video>
+<div class="box">
+	<div class="bar"></div>
+</div>
+<span id="ts">0:0</span>
+<script>
+	var oM=document.querySelector('#vie');
+	var oSpan=document.querySelector('#ts');
+	var oBox=document.querySelector('.box');
+	var oBar=document.querySelector('.bar');
+
+	setInterval(function(){
+		var m=parseInt(oM.duration/60);
+		var s=parseInt(oM.duration%60);
+		var cm=parseInt(oM.currentTime/60);
+		var cs=parseInt(oM.currentTime%60);
+		oSpan.innerHTML=cm+':'+cs+'/'+m+':'+s;
+		oBar.style.width=oM.currentTime/oM.duration*100+'%';
+		
+	},1000/24);
+	oBox.onclick=function(e){
+		var e=e||window.event;
+		var v=e.offsetX/this.offsetWidth*oM.duration;
+		oM.currentTime=v;
+		oM.play();
+	}
+</script>

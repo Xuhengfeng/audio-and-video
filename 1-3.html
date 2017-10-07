@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>document</title>	
+</head>
+<body>
+	<audio src="../Music1/五环之歌.mp3" loop controls></audio>
+	<br>
+	<button>开始</button>		
+	<button>暂停</button>		
+	<script>
+		var oM=document.querySelector('audio');
+		var aBtn=document.querySelectorAll('button');
+		aBtn[0].onclick=function(){
+			oM.play();
+		} 
+		aBtn[1].onclick=function(){
+			oM.pause();
+		}
+	</script>
+</body>

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<video src="video1/1.mp4" controls poster="video/yamiedie.jpeg"></video>
+	<button onclick="set(1)">上一集</button>
+	<button onclick="set(2)">下一集</button>
+	<ul id="list" style="border:1px solid red"></ul>
+	<script>
+		var oM=document.querySelector('video');
+		var oList=document.querySelector('#list');
+
+		var data=[
+			{'url':'video1/1.mp4','name':'低成本武侠剧'},
+			{'url':'video1/2.mp4','name':'学霸双休'},
+			{'url':'video1/3.mp4','name':'我不是一个好员工'},
+			{'url':'video1/4.mp4','name':'大王叫我来巡山'},
+		];
+
+		for(var i=0;i<data.length;i++){
+			oList.innerHTML+='<li>'+data[i].name+'</li>';
+		}
+		var aLi=oList.querySelectorAll('li');
+		var init=0;
+		for(var i=0;i<aLi.length;i++){
+			aLi[i].index=i;
+			aLi[i].onclick=function(){
+				init=this.index;
+				oM.src=data[init].url;
+				oM.play();
+			}
+		}
+		function set(num){
+			if(num==1){
+				if(init==0){
+					alert('没了,蛇精病');
+					return;
+				}
+				init--;
+			}else{
+				if(init==data.length-1){
+					alert('没了,蛇精病')
+					return;
+				}
+				init++;
+			}
+			oM.src=data[init].url;
+			oM.play();
+		}
+	</script>
+</body>
+</html>
